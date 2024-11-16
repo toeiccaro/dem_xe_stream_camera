@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite
+
+# Thư mục môi trường ảo (virtual environment)
+camera_ai_env/
+
+# Cấu hình của VS Code
+.vscode/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Tệp yêu cầu (có thể không cần thiết nếu bạn muốn chia sẻ chúng)
+*.log
+
+# Tệp lưu trữ tạm thời từ hệ thống (OS)
+.DS_Store
+Thumbs.db
+
+# Tệp workspace của VS Code
+project.code-workspace
+
+# Tệp cài đặt yêu cầu (Nếu bạn không muốn theo dõi chúng, có thể bỏ dòng này)
+# requirements.txt
+
+# Tệp liên quan đến IDE hoặc editor khác
+.idea/
+
+# Các tệp backup hoặc tạm thời khác
+*~
