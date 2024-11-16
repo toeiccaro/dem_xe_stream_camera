@@ -5,7 +5,7 @@ import cv2
 from process.video_processor import VideoProcessorCamSau
 
 router = APIRouter()
-camera_url_sau = 'rtsp://admin:Quangtri2024@192.168.1.122'
+camera_url_sau = '/home/hello/project/stream_camera/video/camera_sau/4.mp4'
 
 # API that serves video stream
 @router.get("/stream_ai_cam_sau")
