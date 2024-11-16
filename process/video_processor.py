@@ -39,6 +39,7 @@ class VideoProcessorCamSau:
     
     def connect_to_stream(self, source):
         cap = cv2.VideoCapture(source)
+        print(f" connect_to_stream = {source}")
         if not cap.isOpened():
             print(f"Error: Failed to connect to camera source {source}")
         return cap

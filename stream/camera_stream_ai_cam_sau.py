@@ -30,7 +30,7 @@ async def stream_ai_cam_sau():
                            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n\r\n')
                 else:
                     # Nếu không còn frame, có thể dừng stream hoặc làm gì đó ở đây
-                    break
+                    pass
         except Exception as e:
             # Log lỗi nếu cần thiết
             print(f"Error during streaming: {e}")
