@@ -1,13 +1,14 @@
 import logging
 import cv2
 import time
-from fastapi import APIRouter, StreamingResponse
+from fastapi import APIRouter
+from fastapi.responses import StreamingResponse
 
 # Cấu hình logging
 logger = logging.getLogger("camera_stream")
 
 # URL RTSP của camera
-camera_url = 'rtsp://admin:Quangtri2024@192.168.1.122'
+camera_url = 'rtsp://admin:Quangtri2024@192.168.1.123'
 
 router = APIRouter()
 
@@ -20,7 +21,6 @@ def gen_frames():
 
     logger.info("Kết nối thành công tới camera.")
     while True:
-        start_time = time.time()  # Đo thời gian bắt đầu xử lý frame
         success, frame = cap.read()
         if not success:
             logger.warning("Không nhận được khung hình từ camera. Dừng stream.")

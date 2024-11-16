@@ -34,3 +34,5 @@ project.code-workspace
 
 # Các tệp backup hoặc tạm thời khác
 *~
+
+*.pt
