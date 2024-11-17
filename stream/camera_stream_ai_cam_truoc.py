@@ -2,20 +2,20 @@
 from fastapi import APIRouter, BackgroundTasks
 from fastapi.responses import StreamingResponse
 import cv2
-from process.video_processor import VideoProcessorCamSau
+from process.video_processor_truoc import VideoProcessorCamTruoc
 import logging
 
 router = APIRouter()
-camera_url_sau = 'rtsp://admin:Quangtri2024@192.168.1.122'
+camera_url_truoc = 'rtsp://admin:Quangtri2024@192.168.1.123'
 logger = logging.getLogger("camera_stream_ai")
 
 # API that serves video stream
-@router.get("/stream_ai_cam_sau")
-async def stream_ai_cam_sau():
-    camera_url = camera_url_sau  # Replace with your camera URL
+@router.get("/stream_ai_cam_truoc")
+async def stream_ai_cam_truoc():
+    camera_url = camera_url_truoc  # Replace with your camera URL
     model_path = "yolo11x.pt"
-    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_sau'
-    video_processor = VideoProcessorCamSau(source=camera_url, model_path=model_path, cam_path=cam_path)
+    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_truoc'
+    video_processor = VideoProcessorCamTruoc(source=camera_url, model_path=model_path, cam_path=cam_path)
 
     def generate():
         try:
@@ -37,7 +37,7 @@ async def stream_ai_cam_sau():
             # Log lỗi nếu cần thiết
             print(f"Error during streaming: {e}")
         finally:
-            # Giải phóng tài nguyên sau khi hoàn tất stream hoặc có lỗi
+            # Giải phóng tài nguyên truoc khi hoàn tất stream hoặc có lỗi
             video_processor.stream.release()
 
     return StreamingResponse(generate(), media_type="multipart/x-mixed-replace; boundary=frame")
@@ -45,14 +45,14 @@ async def stream_ai_cam_sau():
 @router.get("/camera_ai")
 def start_stream(background_tasks: BackgroundTasks):
     """API để bắt đầu stream video mà không cần trả về dữ liệu."""
-    background_tasks.add_task(background_task_ai_cam_sau)
+    background_tasks.add_task(background_task_ai_cam_truoc)
     return {"message": "Video stream is now running in background."}
 
-def background_task_ai_cam_sau():
-    camera_url = camera_url_sau  # Replace with your camera URL
+def background_task_ai_cam_truoc():
+    camera_url = camera_url_truoc  # Replace with your camera URL
     model_path = "yolo11x.pt"
-    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_sau'
-    video_processor = VideoProcessorCamSau(source=camera_url, model_path=model_path, cam_path=cam_path)
+    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_truoc'
+    video_processor = VideoProcessorCamTruoc(source=camera_url, model_path=model_path, cam_path=cam_path)
     try:
         while True:
             frame = video_processor.process_frame()
@@ -73,5 +73,5 @@ def background_task_ai_cam_sau():
         # Log lỗi nếu cần thiết
         print(f"Error during streaming: {e}")
     finally:
-        # Giải phóng tài nguyên sau khi hoàn tất stream hoặc có lỗi
+        # Giải phóng tài nguyên truoc khi hoàn tất stream hoặc có lỗi
         video_processor.stream.release()

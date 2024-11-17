@@ -17,15 +17,15 @@ class CarType(str, Enum):
     xe_cong_nong = "xe_cong_nong"
     xe_nang = "xe_nang"
 
-class VideoProcessorCamSau:
+class VideoProcessorCamTruoc:
     def __init__(self, source, model_path, cam_path):
         self.source = source  # Store the camera source as an attribute
         self.stream = cv2.VideoCapture(source)
         self.model = YOLO(model_path)
         self.class_names = self.load_class_names("coco.txt")
         self.hardcoded_polylines = {
-            'area1': [(560, 197), (418, 237), (420, 355), (825, 175)],
-            'area2': [(565, 313), (708, 259), (974, 395), (759, 424)]
+            'area1': [(617, 323), (709, 297), (973, 328), (514, 492)],
+            'area2': [(257, 194), (555, 202), (663, 285), (588, 302)]
         }
         self.count = 0
         self.going_up = {}
@@ -179,19 +179,19 @@ class VideoProcessorCamSau:
         self.saveVehicle(track_id, timestamp, image_path, direction, car_type)
         # return frame
 
-    def saveVehicle(self, trackIdCamSau: str, currentTime: datetime, image_path: str, direction, car_type: str):
+    def saveVehicle(self, trackIdCamTruoc: str, currentTime: datetime, image_path: str, direction, car_type: str):
         currentTime = datetime.strptime(currentTime, "%Y%m%d_%H%M%S")  # Adjust the format as needed
         
         # createdAt_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
         # print("createdAt_strcreatedAt_str", createdAt_str)
-        # updatedAtByCamSau_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
+        # updatedAtByCamTruoc_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
         createdAt_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
-        updatedAtByCamSau_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
+        updatedAtByCamTruoc_str = currentTime.strftime("%Y-%m-%dT%H:%M:%S")
         
         vehicle_data = {
-        "trackIdCamSau": f'{trackIdCamSau}',
+        "trackIdCamTruoc": f'{trackIdCamTruoc}',
         "createdAt": createdAt_str,
-        "updatedAtByCamSau": updatedAtByCamSau_str,
+        "updatedAtByCamTruoc": updatedAtByCamTruoc_str,
         "image_path_cam_sau": image_path,
         "direction": direction,
         "car_type": car_type

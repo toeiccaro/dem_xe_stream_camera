@@ -10,7 +10,7 @@ logger = logging.getLogger("camera_stream")
 is_processing = False
 
 # URL RTSP của camera
-camera_url = 'rtsp://admin:Quangtri2024@192.168.1.122'
+camera_url = 'rtsp://admin:Quangtri2024@192.168.1.123'
 
 router = APIRouter()
 
