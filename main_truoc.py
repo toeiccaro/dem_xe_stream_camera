@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from stream.camera_api import router as camera_router  # Cập nhật import từ thư mục stream
+from stream.camera_api_truoc import router as camera_router  # Cập nhật import từ thư mục stream
 from stream.camera_stream_ai_cam_truoc import router as camera_stream_ai_cam_truoc  # Cập nhật import từ thư mục stream
 
 # Cấu hình logging

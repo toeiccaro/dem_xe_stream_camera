@@ -192,7 +192,7 @@ class VideoProcessorCamTruoc:
         "trackIdCamTruoc": f'{trackIdCamTruoc}',
         "createdAt": createdAt_str,
         "updatedAtByCamTruoc": updatedAtByCamTruoc_str,
-        "image_path_cam_sau": image_path,
+        "image_path_cam_truoc": image_path,
         "direction": direction,
         "car_type": car_type
     }

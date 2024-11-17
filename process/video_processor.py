@@ -24,8 +24,8 @@ class VideoProcessorCamSau:
         self.model = YOLO(model_path)
         self.class_names = self.load_class_names("coco.txt")
         self.hardcoded_polylines = {
-            'area1': [(560, 197), (418, 237), (420, 355), (825, 175)],
-            'area2': [(565, 313), (708, 259), (974, 395), (759, 424)]
+            'area1': [(396, 225), (469, 204), (769, 267), (572, 359)],
+            'area2': [(640, 343), (765, 289), (974, 395), (777, 492)]
         }
         self.count = 0
         self.going_up = {}

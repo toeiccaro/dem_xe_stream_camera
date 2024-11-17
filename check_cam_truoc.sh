@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="/home/hello/project/stream_camera/cron_error_camera_ai_sau.log"
+LOG_FILE="/home/hello/project/stream_camera/check_cam_truoc.log"
 
 # Function to check and reset log file if it exceeds 5000 lines
 check_log_file_size() {
@@ -17,9 +17,9 @@ log_with_timestamp() {
 }
 
 # Function to check if port 8000 is listening
-check_port_8009() {
-    if ! nc -z 192.168.1.112 8009; then
-        log_with_timestamp "Port 8009 is not listening. Starting the application with pm2."
+check_port_8010() {
+    if ! nc -z 192.168.1.112 8010; then
+        log_with_timestamp "Port 8010 is not listening. Starting the application with pm2."
 
         cd /
         # Change directory to the project folder
@@ -35,16 +35,15 @@ check_port_8009() {
 
         node -v
         # Start the application with pm2
-        /home/hello/.nvm/versions/node/v18.18.2/bin/pm2 start /home/hello/project/stream_camera/ecosystem.config.js  || exit 1  # Ensure pm2 starts correctly
-
+        /home/hello/.nvm/versions/node/v18.18.2/bin/pm2 start /home/hello/project/stream_camera/ecosystemtruoc.config.js  || exit 1  # Ensure pm2 starts correctly
         sleep 60
-        response=$(curl -s -X 'GET' 'http://192.168.1.112:8009/camera_ai' -H 'accept: application/json')
+        response=$(curl -s -X 'GET' 'http://192.168.1.112:8010/camera_ai' -H 'accept: application/json')
 
     else
-        log_with_timestamp "Port 8009 is already listening."
+        log_with_timestamp "Port 8010 is already listening."
     fi
 }
 
 # Check if port 8000 is listening
-check_port_8009
+check_port_8010
 

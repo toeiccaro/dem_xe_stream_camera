@@ -1,4 +1,4 @@
-LOG_FILE="/home/hello/project/dem_xe_be/cron_error_restart_be.log"
+LOG_FILE="/home/hello/project/stream_camera/restart_cam_sau.log"
 
 # Function to check and reset log file if it exceeds 5000 lines
 check_log_file_size() {
@@ -18,12 +18,16 @@ log_with_timestamp() {
 
 # Function to restart the "be" application using pm2
 restart_be() {
-    log_with_timestamp "Restarting the 'be' application using pm2."
+    log_with_timestamp "Restarting the 'camera_ai_sau' application using pm2."
 
     source /home/hello/.nvm/nvm.sh || exit 1  # Load nvm
     
     # Restart the 'be' application (it assumes 'be' is the name or id of your pm2 app)
     /home/hello/.nvm/versions/node/v18.18.2/bin/pm2 restart camera_ai_sau || exit 1
+
+    sleep 15
+    curl -s -X 'GET' 'http://192.168.1.112:8009/camera_ai' -H 'accept: application/json'
+
 
     # Optionally, you can ensure it's restarted correctly, or do any additional checks
     log_with_timestamp "'be' application has been restarted."
