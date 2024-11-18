@@ -99,7 +99,10 @@ class VideoProcessorCamSau:
         print("xu_ly_khung_hinh", class_id)
         print("self.vehicle_status", self.vehicle_status)
 
-
+        if track_id in self.vehicle_status and (self.vehicle_status[track_id] in ["moved_to_area1", "moved_to_area2"] or self.vehicle_status[track_id] is None):
+            print(f"Xe {track_id} đã chuyển đến khu vực, không thể thay đổi trạng thái nữa.")
+            return
+        
         if (cv2.pointPolygonTest(np.array(self.hardcoded_polylines['area1'], dtype=np.int32), (cx, cy), False) >= 0 and
             self.vehicle_status.get(track_id) == "in_area2"):
             print("cccccccccccc1111111111111111----------->2222222222222222")
@@ -116,13 +119,16 @@ class VideoProcessorCamSau:
             self.vehicle_status[track_id] = "moved_to_area2"
 
         # Kiểm tra nếu xe đang trong khu vực 1
+          # Kiểm tra nếu xe đang trong khu vực 1
         if cv2.pointPolygonTest(np.array(self.hardcoded_polylines['area1'], dtype=np.int32), (cx, cy), False) >= 0:
-            self.vehicle_status[track_id] = "in_area1"
+            if track_id not in self.vehicle_status or self.vehicle_status.get(track_id) != "moved_to_area2":
+                self.vehicle_status[track_id] = "in_area1"
             print("----------->111111111111111111")
+
         # Kiểm tra nếu xe đang trong khu vực 2 và di chuyển trở lại khu vực 1
-        
         if cv2.pointPolygonTest(np.array(self.hardcoded_polylines['area2'], dtype=np.int32), (cx, cy), False) >= 0:
-            self.vehicle_status[track_id] = "in_area2"
+            if track_id not in self.vehicle_status or self.vehicle_status.get(track_id) != "moved_to_area1":
+                self.vehicle_status[track_id] = "in_area2"
             print("----------->222222222222")
 
     def record_vehicle(self, frame, x1, y1, x2, y2, track_id, class_name, direction):
