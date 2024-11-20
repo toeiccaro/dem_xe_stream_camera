@@ -71,9 +71,9 @@ class VideoProcessorCamSau:
             self.reconnect_stream()
             return None  # Skip further processing if the frame is invalid
 
-        self.count += 1
-        if self.count % 5 != 0:
-            return None
+        # self.count += 1
+        # if self.count % 2 != 0:
+        #     return None
 
         frame = cv2.resize(frame, (1020, 500))
         frame = self.draw_hardcoded_polylines(frame)

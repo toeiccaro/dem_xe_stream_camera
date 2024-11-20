@@ -14,7 +14,7 @@ logger = logging.getLogger("camera_stream_ai")
 async def stream_ai_cam_truoc():
     camera_url = camera_url_truoc  # Replace with your camera URL
     model_path = "yolo11x.pt"
-    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_truoc'
+    cam_path = '/home/hello/project/be_server/app/images/cam_truoc'
     video_processor = VideoProcessorCamTruoc(source=camera_url, model_path=model_path, cam_path=cam_path)
 
     def generate():
@@ -51,7 +51,7 @@ def start_stream(background_tasks: BackgroundTasks):
 def background_task_ai_cam_truoc():
     camera_url = camera_url_truoc  # Replace with your camera URL
     model_path = "yolo11x.pt"
-    cam_path = '/home/hello/project/dem_xe_be/app/images/cam_truoc'
+    cam_path = '/home/hello/project/be_server/app/images/cam_truoc'
     video_processor = VideoProcessorCamTruoc(source=camera_url, model_path=model_path, cam_path=cam_path)
     try:
         while True:
