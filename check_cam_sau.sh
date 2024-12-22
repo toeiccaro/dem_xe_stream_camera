@@ -37,7 +37,7 @@ check_port_8009() {
         # Start the application with pm2
         /home/hello/.nvm/versions/node/v18.18.2/bin/pm2 start /home/hello/project/stream_camera/ecosystem.config.js  || exit 1  # Ensure pm2 starts correctly
 
-        sleep 15
+        sleep 10
         response=$(curl -s -X 'GET' 'http://192.168.1.112:8009/camera_ai' -H 'accept: application/json')
 
     else

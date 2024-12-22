@@ -98,7 +98,13 @@ class VideoProcessorCamTruoc:
         cy = (y1 + y2) // 2
         print("xu_ly_khung_hinh", class_id)
         print("self.vehicle_status", self.vehicle_status)
+        print("track_id==", track_id)
+        # print("self.vehicle_status[track_id]=", self.vehicle_status[track_id])
 
+        if track_id is None:
+            print(f"vat the khong xac dinh")
+            return
+        
         if track_id in self.vehicle_status and (self.vehicle_status[track_id] in ["moved_to_area1", "moved_to_area2"] or self.vehicle_status[track_id] is None):
             print(f"Xe {track_id} đã chuyển đến khu vực, không thể thay đổi trạng thái nữa.")
             return
@@ -159,7 +165,7 @@ class VideoProcessorCamTruoc:
                     continue
 
                 # Kiểm tra nếu thời gian tồn tại trong vòng 30 giây
-                if abs((current_time - existing_time).total_seconds()) <= 30:
+                if abs((current_time - existing_time).total_seconds()) <= 60:
                     print(f"An image already exists within 30 seconds. Skipping save.")
                     return  # Không lưu nếu có ảnh bất kỳ trong vòng 30 giây qua
         
@@ -173,7 +179,7 @@ class VideoProcessorCamTruoc:
 
                 # Check if the existing time is within 1 hour of the new timestamp
                 new_time = datetime.now()
-                if abs((new_time - existing_time).total_seconds()) <= 300:
+                if abs((new_time - existing_time).total_seconds()) <= 60:
                     print(f"Image for track_id {track_id} already exists within 5 minutes. Skipping save.")
                     return  # Skip saving if an image exists within 1 hour
         cv2.imwrite(image_path, frame)        
